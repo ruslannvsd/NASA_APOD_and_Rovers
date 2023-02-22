@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.nasaphotos.frags.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_apdFragment"
+            app:destination="@id/apdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.nasaphotos.frags.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_photoFragment"
+            app:destination="@id/photoFragment" />
+        <argument
+            android:name="rover"
+            app:argType="string" />
+        <argument
+            android:name="sol"
+            app:argType="string" />
+        <argument
+            android:name="height"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="com.example.nasaphotos.frags.PhotoFragment"
+        android:label="fragment_photo"
+        tools:layout="@layout/fragment_photo" >
+        <argument
+            android:name="info"
+            app:argType="string" />
+        <argument
+            android:name="src"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/apdFragment"
+        android:name="com.example.nasaphotos.frags.ApdFragment"
+        android:label="fragment_apd"
+        tools:layout="@layout/fragment_apd" >
+        <action
+            android:id="@+id/action_apdFragment_to_photoFragment"
+            app:destination="@id/photoFragment" />
+    </fragment>
+</navigation>

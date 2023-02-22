@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">NASA Photos</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="curiosity">Curiosity</string>
+    <string name="perseverance">Perseverance</string>
+    <string name="share">SHARE</string>
+    <string name="copy">COPY</string>
+    <string name="opportunity">Opportunity</string>
+    <string name="spirit">Spirit</string>
+    <string name="apod">APOD</string>
+    <string name="enter_sol">Enter Sol</string>
+    <string name="refresh">Refresh</string>
+    <string name="today_apod">Today Apod</string>
+</resources>
