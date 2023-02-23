@@ -21,22 +21,22 @@ class ApdFragment : Fragment() {
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    GsonJson(requireContext()).sharedPref.edit().clear().apply()
+                    GsonJson(requireContext()).sharedPref.edit().clear().apply() // clearing sharedPrefs when leaving this fragment
                     findNavController().popBackStack()
                 }
             })
         bnd = FragmentApdBinding.inflate(inflater, container, false)
-        val listener = { info: String, src: String ->
+        val infoShare = { info: String, src: String ->
             val action = ApdFragmentDirections.actionApdFragmentToPhotoFragment(info, src)
             findNavController().navigate(action)
         }
         val rv = bnd.rv
-        ApiService().today(listener, bnd.today, requireContext())
-        ApiService().getApd(listener, rv, requireContext())
+        ApiService().today(infoShare, bnd.today, requireContext())
+        ApiService().getApd(infoShare, rv, requireContext())
         bnd.refresh.setOnClickListener {
             GsonJson(requireContext()).sharedPref.edit().clear().apply()
-            context?.cacheDir?.path?.let { File(it).deleteRecursively() }
-            ApiService().getApd(listener, rv, requireContext())
+            context?.cacheDir?.path?.let { File(it).deleteRecursively() } // clearing cache
+            ApiService().getApd(infoShare, rv, requireContext())
         }
         return bnd.root
     }

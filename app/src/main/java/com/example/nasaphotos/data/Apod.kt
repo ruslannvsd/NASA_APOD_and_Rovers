@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Apod (
+data class Apod ( // getting apod instances from Json string got from the NASA website
     @Json(name = "copyright")       var cop: String = "None given",
     @Json(name = "date")            val date: String,
     @Json(name = "explanation")     val expl: String,
@@ -16,7 +16,7 @@ data class Apod (
     @Json(name = "url")             val url: String = Cons.NONE
         )
 
-data class ApodSimple(
+data class ApodSimple( // I reconstruct the Apod class to my class including only info necessary to me
     val date: String,
     val expl: String,
     val hdurl: String,

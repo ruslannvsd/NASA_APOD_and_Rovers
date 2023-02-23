@@ -19,9 +19,9 @@
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.nasaphotos.frags.ListFragment"
+        android:name="com.example.nasaphotos.frags.RoverPhotosFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" >
+        tools:layout="@layout/fragment_rover_photos" >
         <action
             android:id="@+id/action_listFragment_to_photoFragment"
             app:destination="@id/photoFragment" />

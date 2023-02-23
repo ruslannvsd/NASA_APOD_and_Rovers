@@ -12,11 +12,11 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
-class ListAdapter(
+class RoverPhotosAdapter(
     private val height: Int,
     private val infoShare: (String, String) -> Unit,
     private val photos: List<Photo>
-    ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+    ) : RecyclerView.Adapter<RoverPhotosAdapter.ListViewHolder>() {
     class ListViewHolder(val bnd: ListItemBinding) : RecyclerView.ViewHolder(bnd.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {

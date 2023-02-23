@@ -15,7 +15,7 @@ import com.example.nasaphotos.funs.Cons
 import com.example.nasaphotos.funs.Funs
 import com.squareup.picasso.Picasso
 
-class ApdAdapter(
+class ApdAdapter( // apd is a apod - a picture of day - it is NASA's everyday picture they post
     private val ctx: Context,
     private val infoShare: (String, String) -> Unit,
     private val list: List<ApodSimple>,

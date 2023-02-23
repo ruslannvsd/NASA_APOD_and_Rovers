@@ -38,7 +38,7 @@ class ApiService {
         nasaApi = retrofit.create(NasaApi::class.java)
     }
 
-    fun getPhotos(rover: String, sol: String) : LiveData<List<Photo>> {
+    fun getPhotos(rover: String, sol: String) : LiveData<List<Photo>> { // getting Martian photos
         val photos = nasaApi.photos(rover, sol, Cons.API_KEY)
         val list = MutableLiveData<List<Photo>>()
         photos.enqueue(object : Callback<Photos> {
@@ -56,7 +56,7 @@ class ApiService {
         return list
     }
 
-    fun getApd(
+    fun getApd( //  getting 9 apods
         listener: (String, String) -> Unit,
         rv: RecyclerView,
         ctx: Context
@@ -86,7 +86,7 @@ class ApiService {
         })
     }
 
-    fun today(listener: (String, String) -> Unit, im: ImageView, ctx: Context) {
+    fun today(listener: (String, String) -> Unit, im: ImageView, ctx: Context) { // getting today's apod
         val today = nasaApi.today(Cons.API_KEY)
         today.enqueue(object : Callback<Apod> {
             override fun onResponse(call: Call<Apod>, response: Response<Apod>) {
@@ -118,7 +118,7 @@ class ApiService {
         })
     }
 
-    private fun count (ctx: Context, l: List<ApodSimple>) {
+    private fun count (ctx: Context, l: List<ApodSimple>) { // checking how many images and videos in the returned list
         var imCount = 0
         var viCount = 0
         for (i in l) {
@@ -126,6 +126,6 @@ class ApiService {
                 imCount += 1
             } else viCount += 1
         }
-        Toast.makeText(ctx, "$imCount ims & $viCount vis", Toast.LENGTH_LONG).show()
+        Toast.makeText(ctx, "$imCount images & $viCount videos", Toast.LENGTH_LONG).show()
     }
 }

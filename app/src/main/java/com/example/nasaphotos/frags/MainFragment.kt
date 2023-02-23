@@ -25,14 +25,14 @@ class MainFragment : Fragment() {
     ): View {
         context?.cacheDir?.path?.let { File(it).deleteRecursively() }
         bnd = FragmentMainBinding.inflate(inflater, container, false)
-        sol = bnd.sol
-        hei = bnd.height
-        if (!Funs.wiFi(requireContext())) {
-            Toast.makeText(requireContext(), "Only APOD works", Toast.LENGTH_LONG).show()
+        sol = bnd.sol // sol is a full Martian day
+        hei = bnd.height // height of the image to remove unnecessary and small images from the list
+        if (!Funs.wiFi(requireContext())) { // since one list of images may be of 1GB size I forbade to open it without WiFi
+            Toast.makeText(requireContext(), "Only APOD works", Toast.LENGTH_LONG).show() // but Apod works, there are only 10 images to download
         }
 
-        val solCTotal = sol(1344226677000) // starting sol of Curiosity
-        val solPTotal = sol(1613681700000) // starting sol of Perseverance
+        val solCTotal = sol(1344226677000) // starting millis of Curiosity exploration on Mars
+        val solPTotal = sol(1613681700000) // starting millis of Perseverance  exploration on Mars
 
         (Cons.CURIOSITY + " " + solCTotal).also { bnd.curiosity.text = it }
         (Cons.PERSEVERANCE + " " + solPTotal).also { bnd.perseverance.text = it }
@@ -51,7 +51,7 @@ class MainFragment : Fragment() {
         bnd.spi.setOnClickListener {
             rover(Cons.SOLS_SPI, Cons.SPIRIT)
         }
-        bnd.apod.setOnClickListener {
+        bnd.apod.setOnClickListener {// preventive clearing of sharedPrefs
             val editor = GsonJson(requireContext()).sharedPref.edit()
             editor.putString(Cons.SAL, null)
             editor.apply()
@@ -59,7 +59,7 @@ class MainFragment : Fragment() {
         }
         return bnd.root
     }
-    private fun sol(start: Long) : Int {
+    private fun sol(start: Long) : Int { // getting today's sol on Mars (better say tosol)
         val now = System.currentTimeMillis()
         val diff = now - start
         return (diff / 88775000).toInt()

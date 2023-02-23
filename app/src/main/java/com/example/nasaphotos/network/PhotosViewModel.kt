@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.nasaphotos.data.Photo
 
-class PhotosViewModel : ViewModel() {
+class PhotosViewModel : ViewModel() { // getting images out from ApiService
     private val rep = ApiService()
     fun photosViewModel (rover: String, sol: String) : LiveData<List<Photo>> {
         return rep.getPhotos(rover, sol)

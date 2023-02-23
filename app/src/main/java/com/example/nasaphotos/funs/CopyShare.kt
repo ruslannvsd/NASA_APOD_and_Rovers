@@ -49,7 +49,7 @@ object CopyShare {
             Toast.makeText(ctx, "Text copied", Toast.LENGTH_LONG).show()
             window.dismiss()
         }
-        bnd.setW.setOnClickListener {
+        bnd.setW.setOnClickListener { // setting the wallpaper of what is on the screen
             val bitmap =
                 act.window.decorView.rootView.drawToBitmap(android.graphics.Bitmap.Config.ARGB_8888)
             val wp = android.app.WallpaperManager.getInstance(ctx)

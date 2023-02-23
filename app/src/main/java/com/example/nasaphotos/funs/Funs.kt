@@ -8,20 +8,20 @@ import com.example.nasaphotos.data.*
 
 object Funs {
     fun newUrl(url: String): String {
-        return if (url.startsWith("http://")) url.replace("http://", "https://") else url
+        return if (url.startsWith("http://")) url.replace("http://", "https://") else url // http is not opened so I change it into https
     }
 
-    fun wiFi(ctx: Context): Boolean {
+    fun wiFi(ctx: Context): Boolean { // checking is WiFi is connected
         var check = false
         val conMng = ctx.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val cap = conMng.getNetworkCapabilities(conMng.activeNetwork)
-        if (cap != null) {
-            check = cap.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+        val capabilities = conMng.getNetworkCapabilities(conMng.activeNetwork)
+        if (capabilities != null) {
+            check = capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
         }
         return check
     }
 
-    fun thumb(url: String) : String {
+    fun thumb(url: String) : String { // checking if video is from Youtube or Vimeo
         val src: String
         val list1 = url.split("?")
         src = when {
@@ -42,7 +42,7 @@ object Funs {
         return src
     }
     fun apodList(list: List<Apod>) : List<ApodSimple> {
-        val photos = mutableListOf<ApodSimple>()
+        val photos = mutableListOf<ApodSimple>() // reconstruction of apod class into simpler one
         for (i in list) {
             val apod = apod(i)
             photos.add(apod)

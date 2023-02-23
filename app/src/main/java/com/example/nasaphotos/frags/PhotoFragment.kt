@@ -22,17 +22,16 @@ class PhotoFragment : Fragment() {
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().popBackStack()
+                    findNavController().popBackStack() // clearing cache
                 }
             })
         val src = args.src
-        val info = args.info + "\n" + src
+        val info = args.info + "\n" + src // collecting information to share
         bnd = FragmentPhotoBinding.inflate(inflater, container, false)
         val pic = bnd.pic
         Picasso.get().load(src).into(pic)
-        pic.setOnLongClickListener {
-            CopyShare.copyShare(requireContext(), info, requireActivity())
-            true
+        pic.setOnClickListener {
+            CopyShare.copyShare(requireContext(), info, requireActivity()) // opening small menu
         }
         return bnd.root
     }

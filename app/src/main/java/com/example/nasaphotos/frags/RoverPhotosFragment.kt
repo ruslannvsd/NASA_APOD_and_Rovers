@@ -11,16 +11,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nasaphotos.adaps.ListAdapter
-import com.example.nasaphotos.databinding.FragmentListBinding
+import com.example.nasaphotos.adaps.RoverPhotosAdapter
+import com.example.nasaphotos.databinding.FragmentRoverPhotosBinding
 import com.example.nasaphotos.network.PhotosViewModel
 import java.io.File
 
-class ListFragment : Fragment() {
-    private val args: ListFragmentArgs by navArgs()
-    private lateinit var bnd: FragmentListBinding
+class RoverPhotosFragment : Fragment() {
+    private val args: RoverPhotosFragmentArgs by navArgs()
+    private lateinit var bnd: FragmentRoverPhotosBinding
     private lateinit var vm: PhotosViewModel
-    private lateinit var ad: ListAdapter
+    private lateinit var ad: RoverPhotosAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -33,14 +33,14 @@ class ListFragment : Fragment() {
                 }
             })
         vm = ViewModelProvider(this)[PhotosViewModel::class.java]
-        bnd = FragmentListBinding.inflate(inflater, container, false)
+        bnd = FragmentRoverPhotosBinding.inflate(inflater, container, false)
         val listener = { info: String, src: String ->
-            val action = ListFragmentDirections.actionListFragmentToPhotoFragment(info, src)
+            val action = RoverPhotosFragmentDirections.actionListFragmentToPhotoFragment(info, src)
             findNavController().navigate(action)
         }
         val rv = bnd.rv
         vm.photosViewModel(args.rover, args.sol).observe(viewLifecycleOwner) {
-            ad = ListAdapter(args.height, listener, it)
+            ad = RoverPhotosAdapter(args.height, listener, it)
             rv.adapter = ad
             rv.layoutManager = LinearLayoutManager(requireContext())
             ad.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
