@@ -95,11 +95,14 @@ class MainFragment : Fragment() {
     }
     private fun navigate (rover: String, sol: String, height: Int) {
         val action = MainFragmentDirections
-            .actionMainFragmentToListFragment(
+            .actionMainFragmentToRoverPhotosFragment(
                 rover,
                 sol,
                 height
             )
-        findNavController().navigate(action)
+        findNavController()
+            .navigate(
+                action
+            )
     }
 }

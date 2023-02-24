@@ -57,7 +57,7 @@ class ApiService {
     }
 
     fun getApd( //  getting 9 apods
-        listener: (String, String) -> Unit,
+        infoShare: (String, String) -> Unit,
         rv: RecyclerView,
         ctx: Context
     ) {
@@ -70,7 +70,7 @@ class ApiService {
                         val endList = GsonJson(ctx).fromJson().ifEmpty { photos }
                         count(ctx, endList)
                         GsonJson(ctx).toJson(endList)
-                        val ad = ApdAdapter(ctx, listener, endList)
+                        val ad = ApdAdapter(ctx, infoShare, endList)
                         rv.adapter = ad
                         rv.layoutManager =
                             StaggeredGridLayoutManager(
@@ -86,7 +86,7 @@ class ApiService {
         })
     }
 
-    fun today(listener: (String, String) -> Unit, im: ImageView, ctx: Context) { // getting today's apod
+    fun today(infoShare: (String, String) -> Unit, im: ImageView, ctx: Context) { // getting today's apod
         val today = nasaApi.today(Cons.API_KEY)
         today.enqueue(object : Callback<Apod> {
             override fun onResponse(call: Call<Apod>, response: Response<Apod>) {
@@ -105,7 +105,7 @@ class ApiService {
                                     "\n" + i.date +
                                     "\n" + i.expl
                             im.setOnClickListener {
-                                listener(info, i.hdurl)
+                                infoShare(info, i.hdurl)
                             }
                         }
                     }

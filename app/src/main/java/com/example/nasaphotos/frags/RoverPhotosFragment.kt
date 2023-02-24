@@ -18,7 +18,7 @@ import com.example.nasaphotos.databinding.FragmentRoverPhotosBinding
 import com.example.nasaphotos.network.PhotosViewModel
 import java.io.File
 
-class RoverPhotosFragment(private val ctx: Context) : Fragment() {
+class RoverPhotosFragment() : Fragment() {
     private val args: RoverPhotosFragmentArgs by navArgs()
     private lateinit var bnd: FragmentRoverPhotosBinding
     private lateinit var vm: PhotosViewModel
@@ -37,12 +37,12 @@ class RoverPhotosFragment(private val ctx: Context) : Fragment() {
         vm = ViewModelProvider(this)[PhotosViewModel::class.java]
         bnd = FragmentRoverPhotosBinding.inflate(inflater, container, false)
         val infoShare = { info: String, src: String ->
-            val action = RoverPhotosFragmentDirections.actionListFragmentToPhotoFragment(info, src)
+            val action = RoverPhotosFragmentDirections.actionRoverPhotosFragmentToPhotoFragment(info, src)
             findNavController().navigate(action)
         }
         val rv = bnd.rv
         vm.photosViewModel(args.rover, args.sol).observe(viewLifecycleOwner) {
-            Toast.makeText(ctx, "${it.size} photos", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "${it.size} photos", Toast.LENGTH_LONG).show()
             ad = RoverPhotosAdapter(args.height, infoShare, it)
             rv.adapter = ad
             rv.layoutManager = LinearLayoutManager(requireContext())

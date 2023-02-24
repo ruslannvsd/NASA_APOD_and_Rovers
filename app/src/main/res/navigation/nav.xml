@@ -11,19 +11,19 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_mainFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+            android:id="@+id/action_mainFragment_to_roverPhotosFragment"
+            app:destination="@id/roverPhotosFragment" />
         <action
             android:id="@+id/action_mainFragment_to_apdFragment"
             app:destination="@id/apdFragment" />
     </fragment>
     <fragment
-        android:id="@+id/listFragment"
+        android:id="@+id/roverPhotosFragment"
         android:name="com.example.nasaphotos.frags.RoverPhotosFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_rover_photos" >
         <action
-            android:id="@+id/action_listFragment_to_photoFragment"
+            android:id="@+id/action_roverPhotosFragment_to_photoFragment"
             app:destination="@id/photoFragment" />
         <argument
             android:name="rover"
