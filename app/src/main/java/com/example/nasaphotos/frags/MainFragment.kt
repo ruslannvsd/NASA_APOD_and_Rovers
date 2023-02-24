@@ -27,7 +27,7 @@ class MainFragment : Fragment() {
         bnd = FragmentMainBinding.inflate(inflater, container, false)
         sol = bnd.sol // sol is a full Martian day
         hei = bnd.height // height of the image to remove unnecessary and small images from the list
-        if (!Funs.wiFi(requireContext())) { // since one list of images may be of 1GB size I forbade to open it without WiFi
+        if (!Funs.wiFi(requireContext())) { // since one list of images may be of 1GB size I restricted to open it if there's no WiFi
             Toast.makeText(requireContext(), "Only APOD works", Toast.LENGTH_LONG).show() // but Apod works, there are only 10 images to download
         }
 
@@ -75,11 +75,21 @@ class MainFragment : Fragment() {
                     navigate(roverName, sol, hei)
                 } else Toast.makeText(requireContext(), "Enter an existing sol", Toast.LENGTH_LONG)
                     .show()
-            } else {
+            } else if (roverName == Cons.CURIOSITY || roverName == Cons.PERSEVERANCE) {
+                val ago = totalSol - 2
                 Toast.makeText(
-                    requireContext(), "Yestersol ${totalSol-1}", Toast.LENGTH_LONG
+                    requireContext(),
+                    // Curiosity and Perseverance are still active and update of new photos sometimes takes two sols
+                    "Two sols ago $ago", Toast.LENGTH_LONG
                 ).show()
-                navigate(roverName, totalSol.toString(), hei)
+                navigate(roverName, ago.toString(), hei)
+            } else {
+                val random = (0..totalSol).random()
+                Toast.makeText(
+                    // Opportunity and Spirit have fixed amount of sols so it's good to show random
+                    requireContext(), "Random sol $random", Toast.LENGTH_LONG
+                ).show()
+                navigate(roverName, random.toString(), hei)
             }
         } else Toast.makeText(requireContext(), "No WiFi", Toast.LENGTH_LONG).show()
     }

@@ -1,10 +1,12 @@
 package com.example.nasaphotos.frags
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,7 +18,7 @@ import com.example.nasaphotos.databinding.FragmentRoverPhotosBinding
 import com.example.nasaphotos.network.PhotosViewModel
 import java.io.File
 
-class RoverPhotosFragment : Fragment() {
+class RoverPhotosFragment(private val ctx: Context) : Fragment() {
     private val args: RoverPhotosFragmentArgs by navArgs()
     private lateinit var bnd: FragmentRoverPhotosBinding
     private lateinit var vm: PhotosViewModel
@@ -34,13 +36,14 @@ class RoverPhotosFragment : Fragment() {
             })
         vm = ViewModelProvider(this)[PhotosViewModel::class.java]
         bnd = FragmentRoverPhotosBinding.inflate(inflater, container, false)
-        val listener = { info: String, src: String ->
+        val infoShare = { info: String, src: String ->
             val action = RoverPhotosFragmentDirections.actionListFragmentToPhotoFragment(info, src)
             findNavController().navigate(action)
         }
         val rv = bnd.rv
         vm.photosViewModel(args.rover, args.sol).observe(viewLifecycleOwner) {
-            ad = RoverPhotosAdapter(args.height, listener, it)
+            Toast.makeText(ctx, "${it.size} photos", Toast.LENGTH_LONG).show()
+            ad = RoverPhotosAdapter(args.height, infoShare, it)
             rv.adapter = ad
             rv.layoutManager = LinearLayoutManager(requireContext())
             ad.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
