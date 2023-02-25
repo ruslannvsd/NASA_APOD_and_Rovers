@@ -68,7 +68,8 @@ class MainFragment : Fragment() {
     private fun rover(totalSol: Int, roverName: String) {
         if (Funs.wiFi(requireContext())) {
             val solChosen = sol.text
-            val hei = hei.text.toString().toInt()
+            val hei = height(hei)
+
             if (solChosen.isNotEmpty()) {
                 val sol = solChosen.toString()
                 if (sol.toInt() in 1..totalSol) {
@@ -104,5 +105,12 @@ class MainFragment : Fragment() {
             .navigate(
                 action
             )
+    }
+    private fun height(hei: EditText) : Int {
+        var height = 0
+        if (hei.text.isEmpty()) height = 200 else
+            if (hei.text.toString().toInt() > 900) height = 900 else
+                if (hei.text.toString().toInt() < 0) height = 100
+        return height
     }
 }
