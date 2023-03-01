@@ -8,6 +8,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.nasaphotos.R
 import com.example.nasaphotos.databinding.FragmentPhotoBinding
 import com.example.nasaphotos.funs.CopyShare
 import com.squareup.picasso.Picasso
@@ -29,7 +30,11 @@ class PhotoFragment : Fragment() {
         val info = args.info + "\n" + src // collecting information to share
         bnd = FragmentPhotoBinding.inflate(inflater, container, false)
         val pic = bnd.pic
-        Picasso.get().load(src).into(pic)
+        Picasso
+            .get()
+            .load(src)
+            .placeholder(R.color.black)
+            .into(pic)
         pic.setOnClickListener {
             CopyShare.copyShare(requireContext(), info, requireActivity()) // opening small menu
         }
