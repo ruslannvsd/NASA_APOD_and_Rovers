@@ -107,10 +107,6 @@ class MainFragment : Fragment() {
             )
     }
     private fun height(hei: EditText) : Int {
-        var height = 0
-        if (hei.text.isEmpty()) height = 200 else
-            if (hei.text.toString().toInt() > 900) height = 900 else
-                if (hei.text.toString().toInt() < 0) height = 100
-        return height
+        return if (hei.text.isNotEmpty()) hei.text.toString().toInt() else 0
     }
 }
