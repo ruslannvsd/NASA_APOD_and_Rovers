@@ -22,6 +22,7 @@ class RoverPhotosFragment : Fragment() {
     private lateinit var bnd: FragmentRoverPhotosBinding
     private lateinit var vm: PhotosViewModel
     private lateinit var ad: RoverPhotosAdapter
+    private var firstOpened = true
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -41,7 +42,11 @@ class RoverPhotosFragment : Fragment() {
         }
         val rv = bnd.rv
         vm.photosViewModel(args.rover, args.sol).observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), "${it.size} photos", Toast.LENGTH_LONG).show()
+            if (firstOpened) {
+                Toast.makeText(requireContext(), "${it.size} photos", Toast.LENGTH_LONG).show()
+                firstOpened = false
+            }
+
             ad = RoverPhotosAdapter(args.height, infoShare, it)
             rv.adapter = ad
             rv.layoutManager = LinearLayoutManager(requireContext())

@@ -67,8 +67,11 @@ class ApiService {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         val photos = Funs.apodList(it)
-                        val endList = GsonJson(ctx).fromJson().ifEmpty { photos }
-                        count(ctx, endList)
+                        val endList = GsonJson(ctx).fromJson().ifEmpty {
+                            photos.also { photos ->
+                                count(ctx, photos)
+                            }
+                        }
                         GsonJson(ctx).toJson(endList)
                         val ad = ApdAdapter(ctx, infoShare, endList)
                         rv.adapter = ad
@@ -117,7 +120,6 @@ class ApiService {
             }
         })
     }
-
     private fun count (ctx: Context, l: List<ApodSimple>) { // checking how many images and videos in the returned list
         var imCount = 0
         var viCount = 0
