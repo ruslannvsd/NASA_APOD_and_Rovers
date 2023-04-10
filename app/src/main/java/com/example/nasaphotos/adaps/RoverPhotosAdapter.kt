@@ -13,10 +13,10 @@ import com.squareup.picasso.Picasso
 import java.lang.Exception
 
 class RoverPhotosAdapter(
-    private val height: Int,
+    private val dimens: Int,
     private val infoShare: (String, String) -> Unit,
     private val photos: List<Photo>
-    ) : RecyclerView.Adapter<RoverPhotosAdapter.ListViewHolder>() {
+) : RecyclerView.Adapter<RoverPhotosAdapter.ListViewHolder>() {
     class ListViewHolder(val bnd: ListItemBinding) : RecyclerView.ViewHolder(bnd.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -29,18 +29,23 @@ class RoverPhotosAdapter(
         val photo = photos[p]
         val url = photo.src
         val src = Funs.newUrl(url)
-        Picasso.get().load(src).placeholder(R.drawable.load).into(im, object : Callback {
-            override fun onSuccess() {
-                val bm = im.drawable
-                val wid = bm.intrinsicWidth
-                val hei = bm.intrinsicHeight
-                "${hei}x$wid".also { h.bnd.size.text = it }
-                if (hei < height) h.bnd.card.visibility = View.GONE // make hei variable
-            }
-            override fun onError(e: Exception?) {
-                e?.printStackTrace()
-            }
-        })
+
+        Picasso.get()
+            .load(src)
+            .placeholder(R.drawable.load)
+            .into(im, object : Callback {
+                override fun onSuccess() {
+                    val bm = im.drawable
+                    val wid = bm.intrinsicWidth
+                    val hei = bm.intrinsicHeight
+                    "${hei}x$wid".also { h.bnd.size.text = it }
+                    if (hei < dimens) h.bnd.card.visibility = View.GONE // make hei variable
+                }
+                override fun onError(e: Exception?) {
+                    e?.printStackTrace()
+                }
+            })
+
         im.setOnClickListener {
             val info = info(photo)
             infoShare(
