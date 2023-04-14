@@ -31,6 +31,11 @@ object CopyShare {
         PopupWindowCompat.setWindowLayoutType(window,
             WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
 
+        bnd.info.setOnClickListener {
+            TextWindow.textWindow(ctx, txt)
+            window.dismiss()
+        }
+
         bnd.share.setOnClickListener {
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND

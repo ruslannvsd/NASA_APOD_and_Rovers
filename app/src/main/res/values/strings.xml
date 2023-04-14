@@ -3,8 +3,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="curiosity">Curiosity</string>
     <string name="perseverance">Perseverance</string>
-    <string name="share">SHARE</string>
-    <string name="copy">COPY</string>
+    <string name="share">Share</string>
+    <string name="copy">Copy</string>
     <string name="opportunity">Opportunity</string>
     <string name="spirit">Spirit</string>
     <string name="apod">APOD</string>
@@ -12,4 +12,6 @@
     <string name="refresh">Refresh</string>
     <string name="today_apod">Today Apod</string>
     <string name="list_item">List Item</string>
+    <string name="wallp">Wallp</string>
+    <string name="info">Info</string>
 </resources>

@@ -11,4 +11,6 @@
     <string name="refresh">Refresh</string>
     <string name="today_apod">Today Apod</string>
     <string name="list_item">List Item</string>
+    <string name="wallp">Wallp</string>
+    <string name="info">Info</string>
 </resources>
