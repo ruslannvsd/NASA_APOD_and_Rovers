@@ -2,8 +2,8 @@
 <resources>
     <string name="curiosity">Curiosity</string>
     <string name="perseverance">Perseverance</string>
-    <string name="share">SHARE</string>
-    <string name="copy">COPY</string>
+    <string name="share">Share</string>
+    <string name="copy">Copy</string>
     <string name="opportunity">Opportunity</string>
     <string name="spirit">Spirit</string>
     <string name="apod">APOD</string>
