@@ -6,7 +6,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#45454545">
+        android:backgroundTint="#75454545">
 
         <TextView
             android:id="@+id/info_text"

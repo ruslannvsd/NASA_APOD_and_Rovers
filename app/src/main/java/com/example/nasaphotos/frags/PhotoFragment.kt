@@ -33,7 +33,7 @@ class PhotoFragment : Fragment() {
 
         Picasso.get()
             .load(src)
-            .transform(ResizeTransformation(5000, requireContext()))
+            .transform(ResizeTransformation(5000))
             .into(pic)
 
         pic.setOnClickListener {
