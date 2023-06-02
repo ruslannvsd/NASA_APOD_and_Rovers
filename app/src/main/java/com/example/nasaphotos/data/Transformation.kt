@@ -17,7 +17,6 @@ class ResizeTransformation(private val maxSize: Int) : Transformation {
             val newWidth = width / 4
             val newHeight = height / 4
             val returnBm = Bitmap.createScaledBitmap(source, newWidth, newHeight, false)
-            //Toast.makeText(ctx, "Size is reduced", Toast.LENGTH_LONG).show()
             source.recycle()
             return returnBm
         }
